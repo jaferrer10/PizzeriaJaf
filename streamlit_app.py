@@ -15,7 +15,15 @@ uploaded_files = st.sidebar.file_uploader("Upload a file", type=["csv", "txt", "
 # documento = loader.load()
 
 #Guarda el archivo cargado en el directorio actual
-print(uploaded_files)
+for file in uploaded_files:
+        pdf_reader = PdfReader(file)
+        temp_text = ''
+        for i, page in enumerate(pdf_reader.pages):
+            text = page.extract_text()
+            if text:
+                temp_text += text
+        raw_text += temp_text     
+    
 if len(uploaded_files) > 1 :
     select = selectPDFAnalysis()
     if(select=="Compare") :
@@ -29,7 +37,7 @@ text_splitter = RecursiveCharacterTextSplitter(
     chunk_size=1000,
     chunk_overlap=200
 )
-document_chunks = text_splitter.split_documents(uploaded_files)
+document_chunks = text_splitter.split_documents(pdf_reader)
 
 from langchain_openai import OpenAIEmbeddings
 
