@@ -15,7 +15,7 @@ uploaded_files = st.sidebar.file_uploader("Upload a file", type=["csv", "txt", "
 # documento = loader.load()
 
 #Guarda el archivo cargado en el directorio actual
-uploaded_file (streamlit.UploadedFile): The uploaded file object.
+uploaded_file (streamlit.UploadedFile)
 
 
 from langchain.text_splitter import RecursiveCharacterTextSplitter
