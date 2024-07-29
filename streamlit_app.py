@@ -29,7 +29,7 @@ text_splitter = RecursiveCharacterTextSplitter(
     chunk_size=1000,
     chunk_overlap=200
 )
-document_chunks = text_splitter.split_documents(documento)
+document_chunks = text_splitter.split_documents(uploaded_files)
 
 from langchain_openai import OpenAIEmbeddings
 
