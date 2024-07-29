@@ -1,7 +1,6 @@
 import streamlit as st
 import langchain
 from openai import OpenAI
-from openai import OpenAI
 
 from langchain_openai import ChatOpenAI
 from langchain_openai import OpenAI
