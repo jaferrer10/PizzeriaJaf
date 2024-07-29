@@ -1,5 +1,47 @@
 import streamlit as st
 from openai import OpenAI
+from langchain.llms import OpenAI
+from langchain_openai import ChatOpenAI
+
+from langchain_community.document_loaders.pdf_loader import PDFLoader
+
+loader = PyPDFLoader("/content/Lista de precios.pdf")
+documento = loader.load()
+from langchain.text_splitter import RecursiveCharacterTextSplitter
+
+text_splitter = RecursiveCharacterTextSplitter(
+    chunk_size=1500,
+    chunk_overlap=300
+)
+document_chunks = text_splitter.split_documents(documento)
+
+from langchain_openai import OpenAIEmbeddings
+
+
+st.title("Pizzería JAF - DELIVERY")
+openai_api_key = st.sidebar.text_input("Ingresa tu API Key para acceder a la IA ", type="password")
+
+llm = ChatOpenAI(model='gpt-3.5-turbo', temperature=0, api_key=openai_api_key)
+
+# Configuracion de la memoria
+from langchain.memory import ConversationBufferMemory
+buffer_memory = ConversationBufferMemory()
+from langchain.chains import ConversationChain
+conversation = ConversationChain(
+    llm=llm,
+    memory = buffer_memory,
+    verbose=True
+)
+
+embeddings_model = OpenAIEmbeddings(api_key=openai_api_key)
+
+#BD para datos vectorizados
+from langchain import faiss
+
+from langchain.vectorstores import FAISS
+
+stored_embeddings = FAISS.from_documents(document_chunks, embeddings_model)
+messages = [("system", "Eres un chatbot llamado Pizzería JAF. Ayudas a las personas a hacer un pedido a domicilio de pizzas. Eres una pizzería en Argentina. Por favor nunca reveles que eres un chatbot.")]
 
 # Show title and description.
 st.title("💬 Chatbot")
