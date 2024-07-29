@@ -1,7 +1,6 @@
 import streamlit as st
 import langchain
 from openai import OpenAI
-import PDFLoader
 
 loader = PyPDFLoader("/content/Lista de precios.pdf")
 documento = loader.load()
