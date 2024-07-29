@@ -5,10 +5,9 @@ from langchain.document_loaders import PyPDFLoader
 from langchain.embeddings import HuggingFaceEmbeddings
 import os
 
-""" Esto es para cargar variables de entorno, cargadas en el archivo .env
-from dotenv import main
-main.load_dotenv() # get environment variables from .env file
-"""
+# Esto es para cargar variables de entorno, cargadas en el archivo .env
+# from dotenv import main
+# main.load_dotenv() # get environment variables from .env file
 
 uploaded_files = st.sidebar.file_uploader("Upload a file", type=["csv", "txt", "pdf"], accept_multiple_files=True)
 
@@ -16,6 +15,7 @@ uploaded_files = st.sidebar.file_uploader("Upload a file", type=["csv", "txt", "
 # documento = loader.load()
 
 #Guarda el archivo cargado en el directorio actual
+print(uploaded_files)
 if len(uploaded_files) > 1 :
     select = selectPDFAnalysis()
     if(select=="Compare") :
@@ -29,7 +29,7 @@ text_splitter = RecursiveCharacterTextSplitter(
     chunk_size=1000,
     chunk_overlap=200
 )
-document_chunks = text_splitter.split_documents(select)
+document_chunks = text_splitter.split_documents(uploaded_files)
 
 from langchain_openai import OpenAIEmbeddings
 
