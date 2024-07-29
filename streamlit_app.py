@@ -4,6 +4,7 @@ from langchain.chat_models import ChatOpenAI
 from langchain.document_loaders import PyPDFLoader
 from langchain.embeddings import HuggingFaceEmbeddings
 import os
+from PyPDF2 import PdfReader
 
 # Esto es para cargar variables de entorno, cargadas en el archivo .env
 # from dotenv import main
