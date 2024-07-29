@@ -4,11 +4,20 @@ from langchain.chat_models import ChatOpenAI
 from langchain.document_loaders import PyPDFLoader
 from langchain.embeddings import HuggingFaceEmbeddings
 
+""" Esto es para cargar variables de entorno, cargadas en el archivo .env
 from dotenv import main
 main.load_dotenv() # get environment variables from .env file
+"""
 
-loader = PyPDFLoader("/content/Lista de precios.pdf")
-documento = loader.load()
+uploaded_files = st.sidebar.file_uploader("Upload a file", type=["csv", "txt", "pdf"], accept_multiple_files=True)
+
+# loader = PyPDFLoader("/content/Lista de precios.pdf")
+# documento = loader.load()
+
+#Guarda el archivo cargado en el directorio actual
+uploaded_file (streamlit.UploadedFile): The uploaded file object.
+
+
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 
 text_splitter = RecursiveCharacterTextSplitter(
