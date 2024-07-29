@@ -16,8 +16,12 @@ uploaded_files = st.sidebar.file_uploader("Upload a file", type=["csv", "txt", "
 # documento = loader.load()
 
 #Guarda el archivo cargado en el directorio actual
-uploaded_file(streamlit.UploadedFile)
-
+if len(uploaded_files) > 1 :
+    select = selectPDFAnalysis()
+    if(select=="Compare") :
+        ComparePDFAnalysis(uploaded_files)
+    else :
+        MergePDFAnalysis(uploaded_files)
 
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 
