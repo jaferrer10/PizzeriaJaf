@@ -1,7 +1,5 @@
 import streamlit as st
 from openai import OpenAI
-from langchain.llms import OpenAI
-from langchain_openai import ChatOpenAI
 
 from langchain_community.document_loaders.pdf_loader import PDFLoader
 
