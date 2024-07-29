@@ -3,7 +3,7 @@ import langchain
 from openai import OpenAI
 
 from langchain_openai import ChatOpenAI
-from langchain_openai import OpenAI
+
 
 from langchain_community.document_loaders.pdf_loader import PDFLoader
 
